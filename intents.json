@@ -1,0 +1,45 @@
+{"intents": [
+        {
+            "tag": "greeting",
+            "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day"],
+            "responses": ["Hello, thanks for visiting", "Good to see you again", "Hi there, how can I help?"],
+            "context_set": ""
+        },
+        {
+            "tag": "goodbye",
+            "patterns": ["Bye", "See you later", "Goodbye"],
+            "responses": ["See you later, thanks for visiting", "Have a nice day", "Bye! Come back again soon."]
+        },
+        {
+            "tag": "thanks",
+            "patterns": ["Thanks", "Thank you", "That's helpful"],
+            "responses": ["Happy to help!", "Any time!", "My pleasure"]
+        },
+        {
+            "tag": "creative_dimensions",
+            "patterns": ["What creative sizes are allowed?", "What are the creative dimensions", "What are standard creative sizes", "Acceptable creative file sizes"],
+            "responses": ["Creatives can be 350x250, 720x168, etc.", "Please refer to this URL to review accepted creative sizes."]
+        },
+        {
+            "tag": "dbm",
+            "patterns": ["How do I access DBM?", "Where can I login to Doubleclick Bid Manager"],
+            "responses": ["DBM is found here: http://dbm.google.com", "Please refer to http://dbm.google.com to login"]
+        },
+        {
+            "tag": "cat_access",
+            "patterns": ["Do I have access to the custom audience tool?", "Can I use CAT?", "Is the custom audience tool enabled for my company?"],
+            "responses": ["Please visit mightdesk.mightyhive.com/company and click on the CAT button.", "You should have access to CAT in MightyDesk. If you are having issues logging in, please reach out to your Account Manager."]
+        },
+        {
+            "tag": "cat_faq",
+            "patterns": ["What is CAT?", "How does the custom audience tool work?", "How do I use CAT?", "How does cat work?"],
+            "responses": ["Cat is a first-party data uploader for targeting your CRM audiences in DBM.", "The custom audience tool (CAT) uses your first-party data to target browser cookies.", "Using CAT is simple, just upload a CSV of your user data and within a few days you will be able to target this audience in DBM."]
+        },
+        {
+            "tag": "today",
+            "patterns": ["today"],
+            "responses": ["For rentals today please call 1-800-MYMOPED", "Same-day rentals please call 1-800-MYMOPED"],
+            "context_filter": "rentalday"
+        }
+   ]
+}
