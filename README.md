@@ -16,3 +16,7 @@ and other jargon that is commonly used so that the neural network is trained ext
 
 Once you have trained the model and initialized an instance of `ChatBot`, you can now QA the quality of responses by running,
 in separate code blocks, `chat_bot.response('YOUR QUESTION HERE')`
+
+---
+
+As you can see, the initial `intents.json` doc is barren. The key to this prototype relies on an extensive, exhaustive set of training data. A variety of patterns and thorough responses are ideal for what we are trying to achieve.
