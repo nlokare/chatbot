@@ -3,3 +3,4 @@ checkpoint
 *.csv
 model.tflearn.*
 training_data
+config.py
