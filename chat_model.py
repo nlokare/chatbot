@@ -2,7 +2,7 @@ import json
 # things we need for NLP
 import nltk
 from nltk.stem.lancaster import LancasterStemmer
-# nltk.download('punkt')
+nltk.download('punkt')
 stemmer = LancasterStemmer()
 
 # things we need for Tensorflow
@@ -19,7 +19,11 @@ class ModelBuilder(object):
         self.words = []
         self.classes = []
         self.documents = []
-        self.ignore_words = ['?']
+        self.ignore_words = [
+            'what', 'are', 'is', 'the', 'why', 
+            'does', 'how', 'in', 'on', '?', 'my',
+            'I'
+        ]
 
 
     def parse_intents_doc(self):     
