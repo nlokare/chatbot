@@ -47,12 +47,12 @@ def chat():
     response = chat_bot.response(question)
     answer = response.answer
     Question.create({
-        'match_rate': unicode(response.match_rate),
-        'tag': response.top_match,
-        'question': question,
-        'answer': answer,
-        'timestamp': datetime.now()
-      })
+      'match_rate': unicode(response.match_rate),
+      'tag': response.top_match,
+      'question': question,
+      'answer': answer,
+      'timestamp': datetime.now()
+    })
     return jsonify(
       response_type='in_channel',
       text=answer
@@ -67,12 +67,12 @@ def chat_test():
     response = chat_bot.response(question)
     answer = response.answer
     Question.create({
-        'match_rate': unicode(response.match_rate),
-        'tag': response.top_match,
-        'question': question,
-        'answer': answer,
-        'timestamp': datetime.now()
-      })
+      'match_rate': unicode(response.match_rate),
+      'tag': response.top_match,
+      'question': question,
+      'answer': answer,
+      'timestamp': datetime.now()
+    })
     return jsonify(
       text=answer
     )
