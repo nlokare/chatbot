@@ -4,7 +4,6 @@ import nltk
 from nltk.stem.lancaster import LancasterStemmer
 nltk.download('punkt')
 stemmer = LancasterStemmer()
-
 # things we need for Tensorflow
 import numpy as np
 import tflearn
@@ -24,7 +23,6 @@ class ModelBuilder(object):
             'does', 'how', 'in', 'on', '?', 'my',
             'I'
         ]
-
 
     def parse_intents_doc(self):     
         # loop through each sentence in our intents patterns

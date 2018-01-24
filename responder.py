@@ -1,15 +1,19 @@
+import json
+import logging
+from collections import namedtuple
+import pickle
+import random
 # things we need for NLP
 import nltk
 from nltk.stem.lancaster import LancasterStemmer
 stemmer = LancasterStemmer()
-
 # things we need for Tensorflow
 import numpy as np
 import tflearn
 import tensorflow as tf
-import random
-import pickle
-import json
+
+Logger = logging.getLogger()
+Logger.setLevel(logging.INFO)
 
 data = pickle.load(open('training_data', 'rb'))
 words = data['words']
@@ -33,7 +37,9 @@ net = tflearn.regression(net)
 model = tflearn.DNN(net, tensorboard_dir='tflearn_logs')
 model.load('./model.tflearn')
 
-ERROR_THRESHOLD = 0.85
+ERROR_THRESHOLD = 0.75
+
+Response = namedtuple('Response', 'top_match, match_rate, answer')
 
 class ChatBot(object):
 
@@ -70,15 +76,25 @@ class ChatBot(object):
         for r in results:
             return_list.append((classes[r[0]], r[1]))
         # return tuple of intent and probability
+        logging.info('Classification Results')
+        logging.info(return_list)
         return return_list
 
     def response(self, sentence, show_details=False):
-        print sentence
         results = self.classify(sentence)
         # if we have a classification then find the matching intent tag
         if results:
             top_match = results[0][0]
             match_rate = results[0][1]
-            return (top_match, match_rate.item(), responses[results[0][0]][0])
+            answer = responses[top_match][random.randrange(0,2)]
+            return Response(
+                top_match=top_match,
+                match_rate=match_rate.item(),
+                answer=answer
+            )
         else:
-            return (u'no_match', 0.0, responses['Unknown'])
+            return Response(
+                top_match=u'no_match',
+                match_rate=0.0,
+                answer=responses['Unknown']
+            )

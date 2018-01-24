@@ -1,13 +1,14 @@
+from datetime import datetime
+from flask import current_app, Flask, jsonify, render_template, request
 import json
 import logging
 import os
 
-from flask import current_app, Flask, jsonify, render_template, request
 import config
+import datastore_interface
+
 from chat_model import ModelBuilder
 from responder import ChatBot
-from chat_storage import ChatStorage
-import datastore_interface
 
 chat_bot = ChatBot()
 
@@ -16,7 +17,6 @@ app.config.from_object(config)
 Logger = logging.getLogger()
 Logger.setLevel(logging.INFO)
 
-# Setup the data model.
 with app.app_context():
   Question = datastore_interface
 
@@ -44,16 +44,18 @@ def chat():
       text=get_help_text()
     )
   else:
-    tag, match_rate, chat_response = chat_bot.response(question)
+    response = chat_bot.response(question)
+    answer = response.answer
     Question.create({
-        'match_rate': unicode(match_rate),
-        'tag': tag,
+        'match_rate': unicode(response.match_rate),
+        'tag': response.top_match,
         'question': question,
-        'response': chat_response
+        'answer': answer,
+        'timestamp': datetime.now()
       })
     return jsonify(
       response_type='in_channel',
-      text=chat_response
+      text=answer
     )
 
 @app.route('/chat-tester', methods=['GET'])
@@ -62,15 +64,17 @@ def chat_test():
   if question == 'help':
     return render_template('help.html', text=get_help_text())
   else: 
-    tag, match_rate, chat_response = chat_bot.response(question)
+    response = chat_bot.response(question)
+    answer = response.answer
     Question.create({
-        'match_rate': unicode(match_rate),
-        'tag': tag,
+        'match_rate': unicode(response.match_rate),
+        'tag': response.top_match,
         'question': question,
-        'response': chat_response
+        'answer': answer,
+        'timestamp': datetime.now()
       })
     return jsonify(
-      text=chat_response
+      text=answer
     )
 
 if __name__ == '__main__':

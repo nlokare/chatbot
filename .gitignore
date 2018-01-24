@@ -4,3 +4,4 @@ checkpoint
 model.tflearn.*
 training_data
 config.py
+*.pyc
